@@ -1,26 +1,31 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
-import Link from "next/link";
 import { getAllRecipes } from "@/utils/recipeUtils";
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import { Container } from "@mui/system";
+import { Link, List, Typography } from "@mui/material";
 
 export default function Home(props) {
   return (
     <>
       <Head>
-        <title>Not My Recipes</title>
-        <meta name="description" content="Welcome to my recipes" />
+        <title>Anton's Key Recipes</title>
+        <meta name="description" content="Welcome to Anton's key recipes" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1>Recipes</h1>
+      <Container>
+        <Typography variant="h1">Anton's Key Recipes</Typography>
         {props.recipes?.length &&
           props.recipes.map((r) => (
-            <li key={r.id}>
+            <List key={r.id}>
               <Link href={`/recipe/${r.id}`}>{r.title}</Link>
-            </li>
+            </List>
           ))}
-      </main>
+      </Container>
     </>
   );
 }
