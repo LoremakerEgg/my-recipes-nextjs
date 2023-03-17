@@ -1,5 +1,15 @@
 import { getOneRecipe } from "@/utils/recipeUtils";
-import Link from "next/link";
+import {
+  Card,
+  Link,
+  List,
+  ListItem,
+  Typography,
+  Grid,
+  Container,
+  CardContent,
+} from "@mui/material";
+import { Box } from "@mui/system";
 
 export default function RecipePage(props) {
   if (!props.recipe) {
@@ -7,29 +17,47 @@ export default function RecipePage(props) {
   }
 
   return (
-    <div>
-      <h1>{props.recipe.title}</h1>
-      <h2>{props.recipe.description}</h2>
-      <div>
-        <h3>Ingredients</h3>
-        <ul>
-          {props.recipe.ingredients.map((ing) => (
-            <li key={ing}>{ing}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h3>Instructions</h3>
-        <ul>
-          {props.recipe.instructions.map((inst) => (
-            <li key={inst}>{inst}</li>
-          ))}
-        </ul>
-      </div>
-      <div>
+    <Container>
+      <Typography variant="h2">{props.recipe.title}</Typography>
+      <Typography variant="h5" sx={{ mb: 2 }}>
+        {props.recipe.description}
+      </Typography>
+      <Grid container spacing={2}>
+        <Grid item>
+          <Card
+            sx={{ maxWidth: 300, backgroundColor: "#627894" }}
+            variant="outlined"
+          >
+            <CardContent>
+              <Typography variant="h6">Ingredients</Typography>
+              <List>
+                {props.recipe.ingredients.map((ing) => (
+                  <ListItem key={ing}>{ing}</ListItem>
+                ))}
+              </List>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item>
+          <Card
+            sx={{ maxWidth: 400, backgroundColor: "#627894" }}
+            variant="outlined"
+          >
+            <CardContent>
+              <Typography variant="h6">Instructions</Typography>
+              <List>
+                {props.recipe.instructions.map((inst) => (
+                  <ListItem key={inst}>{inst}</ListItem>
+                ))}
+              </List>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+      <Box>
         <Link href="/">← Back to home</Link>
-      </div>
-    </div>
+      </Box>
+    </Container>
   );
 }
 
